@@ -1,0 +1,36 @@
+Let's start by figuring out how many dinosaurs we have. Count the number of dinosaurs.
+  1)SELECT COUNT(*) FROM dinos;
+
+We want to open up our own version of Jurassic Park, but this time only with dinosaurs who are actually from the Jurassic period. Find all the dinosaurs from the Jurassic period.
+  2)SELECT * FROM dinos WHERE period LIKE '%Jurassic%';
+
+Jurassic Park was a huge success for us. Now we want to open up a sequel park: Cretaceous Park. This time though, we're a little more organized, and we want to know how much space all these dinosaurs are going to take up. Find the total sum length of all the dinosaurs from the Cretaceous period.
+  3)SELECT COUNT(*) FROM dinos WHERE period LIKE '%Cretaceous%'
+
+Great news! Our board of investors recently secured us a large island where we can put all the dinosaurs from both Jurassic Park and Cretaceous Park. This new park will be called Juraceous Park, which according to our focus groups really rolls off the tongue. Find all the dinosaurs from either the Jurassic OR Cretaceous periods, and order them by their species name alphabetically.
+  4)SELECT * FROM dinos WHERE period LIKE '%Cretaceous%' OR period LIKE '%Jurassic%' ORDER BY species ASC;
+
+Saurischians are the "lizard hipped" order of dinosaurs, and one of the two main branches. All carnivorous dinosaurs are Saurischians, but not all Saurischians are carnivorous. Find all the dinosaurs from the t_order Saurischia that are Herbivorous.
+  5) SELECT * FROM dinos WHERE t_order LIKE '%Saurischia%' AND diet LIKE '%Herbivorous%';
+
+Dinosaur names are hard to remember. Find the shortest dinosaur, and rename it Shortie.
+  6)UPDATE dinos SET name = 'Shortie' WHERE length = (SELECT MIN(length) FROM dinos);
+
+It's the first day of Dino School, and we're doing roll call. Find the alphabetically first dinosaur, so we can make sure they're present for class.
+  7)SELECT * FROM dinos AS name ORDER BY name ASC LIMIT 1;
+
+Rename the five longest dinosaurs The Famous Five.
+  8)SELECT * FROM dinos AS length ORDER BY length DESC LIMIT 5;
+ id |      name       |                                                                                   taxonomy                                                                                   |    species     | length |   period   |    diet     |         created_at         |         updated_at         |   t_order
+----+-----------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------+--------+------------+-------------+----------------------------+----------------------------+--------------
+ 18 | Udanoceratops   | Dinosauria, Ornithischia, Genasauria, Cerapoda, Marginocephalia, Ceratopsia, Neoceratopsia, Udanoceratops                                                                    | Tschizhovi     |        | Cretaceous | Herbivorous | 2017-03-24 18:56:22.406378 | 2017-03-24 18:57:00.089397 | Ornithischia
+  7 | Yingshanosaurus | Dinosauria, Ornithischia, Genasauria, Thyreophora, Stegosauria, Yingshanosaurus                                                                                              | Jichuanensis   |        | Jurassic   | Herbivorous | 2017-03-24 18:56:22.390165 | 2017-03-24 18:56:59.93033  | Ornithischia
+ 23 | Tsagantegia     | Dinosauria, Ornithischia, Genasauria, Thyreophora, Ankylosauromorpha, Ankylosauria, Ankylosauridae, Tsagantegia                                                              | Longicranialis |        | Cretaceous | Herbivorous | 2017-03-24 18:56:22.414337 | 2017-03-24 18:57:00.093949 | Ornithischia
+ 60 | Shamosaurus     | Dinosauria, Ornithischia, Genasauria, Thyreophora, Ankylosauromorpha, Ankylosauria, Ankylosauridae, Shamosaurus                                                              | Scutatus       |        | Cretaceous | Herbivorous | 2017-03-24 18:56:22.476988 | 2017-03-24 18:57:00.14048  | Ornithischia
+ 35 | Tanius          | Dinosauria, Ornithischia, Genasauria, Cerapoda, Ornithopoda, Euornithopoda, Iguanadontia, Euiguanadontia, Dryomorpha, Ankylopollexia, Iguanodontoidea, Hadrosauridae, Tanius | Sinensis       |        | Cretaceous | Herbivorous | 2017-03-24 18:56:22.432603 | 2017-03-24 18:57:00.10992  | Ornithischia
+(5 rows)
+
+UPDATE dinos SET name = 'The Famous Five' WHERE id=18 OR id=7 OR id=23 OR id=60 OR id=35;
+
+
+DID NUMBER 8 in two steps
